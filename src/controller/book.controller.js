@@ -2,6 +2,7 @@ const Book = require("../model/Book");
 const path = require("path");
 const uuid = require("uuid");
 const { updateOne } = require("../model/Order");
+
 const addBook = async (req, res) => {
   const bookList = req.body.books;
   let response = [];
@@ -91,6 +92,7 @@ const downloadBookPdf = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 const downloadBookThumbnail = async (req, res) => {
   try {
     const response = await Book.find({ _id: req.params.id });
@@ -100,10 +102,13 @@ const downloadBookThumbnail = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-exports.getAllBooks = getAllBooks;
-exports.addBook = addBook;
-exports.updateOneBook = updateOneBook;
-exports.deleteOneBook = deleteOneBook;
-exports.getBookById = getBookById;
-exports.downloadBookPdf = downloadBookPdf;
-exports.downloadBookThumbnail = downloadBookThumbnail;
+
+module.exports = {
+  getAllBooks,
+  addBook,
+  updateOneBook,
+  deleteOneBook,
+  getBookById,
+  downloadBookPdf,
+  downloadBookThumbnail,
+};

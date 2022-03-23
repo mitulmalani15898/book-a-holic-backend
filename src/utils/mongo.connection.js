@@ -10,5 +10,7 @@ const MONGODB_URL = process.env.MONGODB_URL;
       "mongodb+srv://bookoholic:bookoholic@cluster0.dzzdv.mongodb.net/bookoholic?retryWrites=true&w=majority"
     );
     console.log("Db connected to " + db.connection.name);
-  } catch (error) {}
+  } catch (error) {
+    console.log('Db connection error', error)
+  }
 })();

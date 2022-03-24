@@ -6,7 +6,7 @@ require("./src/utils/mongo.connection");
 const paymentRoutes = require("./src/routes/payment.routes");
 const orderRoutes = require("./src/routes/order.routes");
 const bookRoutes = require("./src/routes/book.routes");
-
+const userRoutes = require("./src/routes/routes");
 const app = express();
 
 // accepting incoming json requests
@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
 app.use(paymentRoutes);
 app.use(orderRoutes);
 app.use(bookRoutes);
+app.use(userRoutes);
 
 app.use("*", (req, res) => {
   res.status("404").send("Route not found.");

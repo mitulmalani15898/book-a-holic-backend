@@ -31,7 +31,7 @@ app.use((err, req, res, next) => {
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to Book-a-holic!");
 });
-
+app.use('/static', express.static('static'))
 app.use(paymentRoutes);
 app.use(orderRoutes);
 app.use(bookRoutes);
@@ -39,5 +39,6 @@ app.use(bookRoutes);
 app.use("*", (req, res) => {
   res.status("404").send("Route not found.");
 });
+
 
 module.exports = app;

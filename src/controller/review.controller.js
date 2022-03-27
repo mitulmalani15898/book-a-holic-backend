@@ -1,5 +1,6 @@
 const reviews = require("../model/Reviews");
 const url = require("url");
+// API for adding book review.
 
 const addReview = async (req, res) => {
   try {
@@ -13,7 +14,6 @@ const addReview = async (req, res) => {
 
 const getReview = async (req, res) => {
   try {
-    // const bookInfo = new reviews(req.body);
     const bookId = req.body.bookId;
     console.log(bookId);
     const response = await reviews.find({ bookId: bookId });

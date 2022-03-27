@@ -9,7 +9,7 @@ const book = new Schema({
   bookDescription: String,
   author: String,
   isbn: String,
-  year: Number,
+  year: String,
   price: Number,
   actualPrice:Number,
   imageUrl:String,

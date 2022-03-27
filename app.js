@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require("multer");
 
 require("./src/utils/mongo.connection");
 const paymentRoutes = require("./src/routes/payment.routes");
@@ -11,7 +12,7 @@ const app = express();
 
 // accepting incoming json requests
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 // enable cors
 app.use(cors());
@@ -31,6 +32,7 @@ app.use((err, req, res, next) => {
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to Book-a-holic!");
 });
+
 app.use('/static', express.static('static'))
 app.use(paymentRoutes);
 app.use(orderRoutes);

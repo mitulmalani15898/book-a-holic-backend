@@ -7,12 +7,13 @@ require("./src/utils/mongo.connection");
 const paymentRoutes = require("./src/routes/payment.routes");
 const orderRoutes = require("./src/routes/order.routes");
 const bookRoutes = require("./src/routes/book.routes");
+const profileRoutes = require("./src/routes/user.profile.routes");
 
 const app = express();
 
 // accepting incoming json requests
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: false }));
 
 // enable cors
 app.use(cors());
@@ -37,6 +38,7 @@ app.use('/static', express.static('static'))
 app.use(paymentRoutes);
 app.use(orderRoutes);
 app.use(bookRoutes);
+app.use(profileRoutes);
 
 app.use("*", (req, res) => {
   res.status("404").send("Route not found.");

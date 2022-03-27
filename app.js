@@ -2,12 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("multer");
+const path = require("path");
 
 require("./src/utils/mongo.connection");
 const paymentRoutes = require("./src/routes/payment.routes");
 const orderRoutes = require("./src/routes/order.routes");
 const bookRoutes = require("./src/routes/book.routes");
 const profileRoutes = require("./src/routes/user.profile.routes");
+const reviewRoutes = require("./src/routes/review.routes")
+const userRoutes = require("./src/routes/user.routes");
 
 const app = express();
 
@@ -39,6 +42,8 @@ app.use(paymentRoutes);
 app.use(orderRoutes);
 app.use(bookRoutes);
 app.use(profileRoutes);
+app.use(reviewRoutes);
+app.use(userRoutes);
 
 app.use("*", (req, res) => {
   res.status("404").send("Route not found.");

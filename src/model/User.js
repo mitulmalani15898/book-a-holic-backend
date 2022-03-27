@@ -7,8 +7,7 @@ const userModel = new mongoose.Schema({
   },
   lastName: {
     type: String,
-    default: null,
-    required: false,
+    required: true,
   },
   email: {
     type: String,
@@ -21,12 +20,12 @@ const userModel = new mongoose.Schema({
   },
   occupation: {
     type: String,
-    default: null,
+    default: "",
     required: false,
   },
   preferences: {
     type: String,
-    default: null,
+    default: "",
     required: false,
   },
   avatar: {
@@ -37,5 +36,6 @@ const userModel = new mongoose.Schema({
     default: Date.now,
   },
 });
+
 
 module.exports = mongoose.model("User", userModel);

@@ -6,6 +6,7 @@ const mongoose = require("./utils/mongo.connection");
 const paymentRoutes = require("./routes/payment.routes");
 const orderRoutes = require("./routes/order.routes");
 const bookRoutes = require("./routes/book.routes");
+const reviewRoutes = require("./routes/review.routes")
 const userRoutes = require("./routes/user.routes");
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(userRoutes);
 app.use(paymentRoutes);
 app.use(orderRoutes);
 app.use(bookRoutes);
+app.use(reviewRoutes);
 
 module.exports = app;

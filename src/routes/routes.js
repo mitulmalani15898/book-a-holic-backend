@@ -17,12 +17,11 @@ const {
   deleteUser,
 } = require("../controller/user-controller");
 
-route.get("/api/", getUsers);
-
-route.post("/api/add", addUser);
-route.get("/api/:id", getUserById);
-route.put("/api/:id", editUser);
-route.delete("/api/:id", deleteUser);
+route.get("/api/user", getUsers);
+route.post("/api/user/add", addUser);
+route.get("/api/user/:id", getUserById);
+route.put("/api/user/:id", editUser);
+route.delete("/api/user/:id", deleteUser);
 
 //export default route;
 

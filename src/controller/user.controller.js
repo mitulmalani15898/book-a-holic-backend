@@ -1,3 +1,9 @@
+/**
+ * File: user.controller.js
+ * Author: Abhinav Rawat (B00895691)
+ * File Purpose: Contains controller logic for all user APIs.
+ */
+
 const jwt = require("jsonwebtoken");
 const user = require("../model/User");
 const nodemailer = require("nodemailer");
@@ -36,7 +42,6 @@ const loginUser = async (req, res) => {
     const userData = new user(req.body);
     const userEmail = userData.email;
     const userPassword = userData.password;
-    //console.log(req.body);
     const response = await user.findOne({ email: userEmail });
     const fetchedPassword = response.password;
     if (userPassword === fetchedPassword) {
@@ -44,7 +49,6 @@ const loginUser = async (req, res) => {
         expiresIn: "1h",
       });
       var auth = { token: token, email: userEmail };
-      //console.log(auth);
       return res.status(200).send({
         success: true,
         data: auth,
@@ -66,8 +70,6 @@ const forgotUser = async (req, res) => {
         expiresIn: "15m",
       });
       var auth = { token: token, email: userEmail };
-      //console.log(auth);
-
       main(auth).catch(console.error);
 
       return res
@@ -139,4 +141,3 @@ exports.loginUser = loginUser;
 exports.addUser = addUser;
 exports.forgotUser = forgotUser;
 exports.recoveryUser = recoveryUser;
-//exports.changePassword = changePassword;

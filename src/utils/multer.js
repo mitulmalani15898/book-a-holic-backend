@@ -1,3 +1,4 @@
+// Author: Prit Thakkar (B00890731)
 const multer = require("multer");
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {

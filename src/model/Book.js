@@ -5,16 +5,13 @@ const Schema = mongoose.Schema;
 const book = new Schema({
   _id:String,
   title: String,
-  categoryId: Number,
+  category: String,
   bookDescription: String,
-  authors: [
-    {
-      type: String,
-    },
-  ],
+  author: String,
   isbn: String,
-  year: Number,
+  year: String,
   price: Number,
+  actualPrice:Number,
   imageUrl:String,
   bookUrl:String
 });

@@ -1,3 +1,9 @@
+/**
+ * File: User.js
+ * Author: Abhinav Rawat (B00895691)
+ * File Purpose: User Model
+ */
+
 const mongoose = require("mongoose");
 
 const userModel = new mongoose.Schema({

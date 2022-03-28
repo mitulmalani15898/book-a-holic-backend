@@ -1,6 +1,13 @@
+/**
+ * File: user.profile.controller.js
+ * Author: Yashvi Gulati (B00900339)
+ * File Purpose: Contains controller logic for all user profile APIs.
+ */
+
 const user = require("../model/User");
 const url = require("url");
 
+// GET - To display data of a specific user
 const getUserProfile = async (req, res) => {
   try {
     const queryObject = url.parse(req.url, true).query;
@@ -18,6 +25,7 @@ const getUserProfile = async (req, res) => {
   }
 };
 
+// POST - To upload profile picture
 const uploadProfilePicture = async (req, res) => {
   try {
     const { email } = req.query;
@@ -38,6 +46,7 @@ const uploadProfilePicture = async (req, res) => {
   }
 };
 
+// PUT - To edit user profile
 const editGeneralProfile = async (req, res) => {
   try {
     const updatedUser = req.body;
@@ -59,6 +68,7 @@ const editGeneralProfile = async (req, res) => {
   }
 };
 
+// DELETE - To delete user from the database
 const deleteProfile = async (req, res) => {
   try {
     const { email } = req.query;

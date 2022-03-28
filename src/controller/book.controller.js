@@ -1,9 +1,33 @@
 const Book = require("../model/Book");
 const path = require("path");
 const uuid = require("uuid");
+const { updateOne } = require("../model/Order");
 const url = require("url");
 
 const addBook = async (req, res) => {
+  const files = req.files;
+  let response = [];
+  if (req.body === null) {
+    res.status(400).json({
+      success: true,
+      message: "Book cannot cannot be empty",
+      data: bookList,
+    });
+  }
+  try {
+      const book = constructBookObject(files,req);
+      book._id = uuid.v4();
+      const savedBook = await book.save();
+      response.push(savedBook);
+    res
+      .status(200)
+      .json({ success: true, message: "Book(s) Added", data: response });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const addBulkBookData = async (req, res) => {
   const bookList = req.body.books;
   let response = [];
   if (bookList === null || bookList.length === 0) {
@@ -83,13 +107,12 @@ const getBookById = async (req, res) => {
 
 const updateOneBook = async (req, res) => {
   try {
-    const bookToBeUpdated = req.body;
-    const book = new Book(req.body);
+    const files = req.files;
+    const book = constructBookObject(files,req);
     delete book._id;
     const updatedResult = await Book.updateOne({ _id: req.body._id }, book, {
       upsert: true,
     });
-    console.log(updatedResult);
     res.status(200).json({
       success: updatedResult.acknowledged,
       message: "Book Updated",
@@ -102,7 +125,7 @@ const updateOneBook = async (req, res) => {
 
 const deleteOneBook = async (req, res) => {
   try {
-    const book = await Book.deleteOne({ _id: req.body._id });
+    const book = await Book.deleteOne({ _id: req.params.id });
     res.status(200).json({
       success: book.acknowledged,
       message: "Deleted entry",
@@ -133,6 +156,20 @@ const downloadBookThumbnail = async (req, res) => {
   }
 };
 
+const constructBookObject = (files,req) => {
+  const book = new Book(req.body);
+  if(files!=null) {
+  for(const filePath in files) {
+    if(files[filePath].path.includes(".pdf")) {
+      book.bookUrl = files[filePath].path;
+    }else{
+      book.imageUrl = files[filePath].path;
+    }
+  }
+  }
+  return book;
+}
+
 module.exports = {
   getAllBooks,
   addBook,
@@ -141,4 +178,5 @@ module.exports = {
   getBookById,
   downloadBookPdf,
   downloadBookThumbnail,
+  addBulkBookData
 };

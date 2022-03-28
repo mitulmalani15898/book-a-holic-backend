@@ -8,14 +8,11 @@ require("./src/utils/mongo.connection");
 const paymentRoutes = require("./src/routes/payment.routes");
 const orderRoutes = require("./src/routes/order.routes");
 const bookRoutes = require("./src/routes/book.routes");
-<<<<<<< HEAD
-const userRoutes = require("./src/routes/routes");
-=======
+const userRoutess = require("./src/routes/routes");
 const profileRoutes = require("./src/routes/user.profile.routes");
-const reviewRoutes = require("./src/routes/review.routes")
+const reviewRoutes = require("./src/routes/review.routes");
 const userRoutes = require("./src/routes/user.routes");
 
->>>>>>> main
 const app = express();
 
 // accepting incoming json requests
@@ -41,20 +38,17 @@ app.get("/", (req, res) => {
   res.status(200).send("Welcome to Book-a-holic!");
 });
 
-app.use('/static', express.static('static'))
+app.use("/static", express.static("static"));
 app.use(paymentRoutes);
 app.use(orderRoutes);
 app.use(bookRoutes);
-<<<<<<< HEAD
-=======
 app.use(profileRoutes);
 app.use(reviewRoutes);
->>>>>>> main
 app.use(userRoutes);
+app.use(userRoutess);
 
 app.use("*", (req, res) => {
   res.status("404").send("Route not found.");
 });
-
 
 module.exports = app;

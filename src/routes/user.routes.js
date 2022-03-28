@@ -4,6 +4,10 @@ const router = express.Router();
 
 router.post("/api/user", userController.loginUser);
 router.post("/api/user/add", userController.addUser);
-router.get("api/user/recovery/:email", userController.forgotUser);
+router.post("/api/user/forgot/:email", userController.forgotUser);
+router.post(
+  "/api/user/recovery/:token/:userEmail",
+  userController.recoveryUser
+);
 
 module.exports = router;

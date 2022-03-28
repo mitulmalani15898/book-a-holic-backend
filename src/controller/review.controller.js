@@ -4,8 +4,10 @@ const url = require("url");
 const addReview = async (req, res) => {
   try {
     const bookReview = new reviews(req.body);
+    console.log(req.body);
     const updateBook = await bookReview.save();
-    res.status(200).send({ success: true, message:"Review added!" });
+    console.log(updateBook);
+    res.status(200).send({ success: true, message: "Review added!" });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -13,8 +15,8 @@ const addReview = async (req, res) => {
 
 const getReview = async (req, res) => {
   try {
-    // const bookInfo = new reviews(req.body);
-    const bookId = req.body.bookId;
+    const queryObject = url.parse(req.url, true).query;
+    const bookId = queryObject.bookId;
     console.log(bookId);
     const response = await reviews.find({ bookId: bookId });
     console.log(response);

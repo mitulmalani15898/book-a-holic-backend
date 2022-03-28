@@ -1,3 +1,4 @@
+// Author: Prit Thakkar (B00890731)
 const mongoose = require("mongoose");
 const model = mongoose.model;
 const Schema = mongoose.Schema;

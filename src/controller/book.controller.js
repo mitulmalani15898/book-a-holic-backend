@@ -1,3 +1,4 @@
+// Author: Prit Thakkar (B00890731), Mitul Pravinbhai Malani (B00869519)
 const Book = require("../model/Book");
 const path = require("path");
 const uuid = require("uuid");

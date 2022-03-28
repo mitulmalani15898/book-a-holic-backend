@@ -1,3 +1,5 @@
+// Author: Prit Thakkar (B00890731)
+
 /*
 The payment model is used to transfer the data received from client and the data sent back from the
 server, dealing with the payment method details of a user.

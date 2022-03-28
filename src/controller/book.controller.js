@@ -1,7 +1,8 @@
 const Book = require("../model/Book");
 const path = require("path");
 const uuid = require("uuid");
-const { updateOne } = require("../model/Order"); 
+const { updateOne } = require("../model/Order");
+const url = require("url");
 
 const addBook = async (req, res) => {
   const files = req.files;
@@ -52,15 +53,44 @@ const addBulkBookData = async (req, res) => {
   }
 };
 
-
 const getAllBooks = async (req, res) => {
   try {
-    const response = await Book.find();
-    res
-      .status(200)
-      .json({ success: true, message: "All Books", data: response });
+    const queryObject = url.parse(req.url, true).query;
+    const searchText = queryObject.search;
+    let categories = queryObject.categories;
+    let searchResponse = [],
+      filterResponse = [];
+
+    // search by author name or book title
+    if (searchText) {
+      const searchRegex = new RegExp(searchText, "i");
+      searchResponse = await Book.find({
+        $or: [{ author: searchRegex }, { title: searchRegex }],
+      });
+    }
+    // filter by categories
+    if (categories) {
+      categories = JSON.parse(queryObject.categories);
+      filterResponse = await Book.find({ category: { $in: categories } });
+    }
+
+    if (searchText || categories) {
+      return res.status(200).send({
+        success: true,
+        message: "Filtered Books",
+        data: [...searchResponse, ...filterResponse].filter(
+          (item, i, arr) => i === arr.findIndex((t) => t._id === item._id)
+        ),
+      });
+    } else {
+      const response = await Book.find({});
+      return res
+        .status(200)
+        .send({ success: true, message: "All Books", data: response });
+    }
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.log("error", error);
+    res.status(500).send({ success: false, message: error.message });
   }
 };
 
@@ -128,7 +158,7 @@ const downloadBookThumbnail = async (req, res) => {
 
 const constructBookObject = (files,req) => {
   const book = new Book(req.body);
-  if(files!=null) { 
+  if(files!=null) {
   for(const filePath in files) {
     if(files[filePath].path.includes(".pdf")) {
       book.bookUrl = files[filePath].path;

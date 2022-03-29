@@ -1,10 +1,21 @@
-// Author: Prit Thakkar (B00890731), Mitul Pravinbhai Malani (B00869519)
+/** 
+ *  @author Prit Thakkar (B00890731)
+ *  @author Mitul Pravinbhai Malani (B00869519) 
+ * */
+
+
 const Book = require("../model/Book");
 const path = require("path");
 const uuid = require("uuid");
 const { updateOne } = require("../model/Order");
 const url = require("url");
 
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * Used to add book to the database
+ */
 const addBook = async (req, res) => {
   const files = req.files;
   let response = [];
@@ -28,6 +39,12 @@ const addBook = async (req, res) => {
   }
 };
 
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * Used to add books to the database
+ */
 const addBulkBookData = async (req, res) => {
   const bookList = req.body.books;
   let response = [];
@@ -54,6 +71,12 @@ const addBulkBookData = async (req, res) => {
   }
 };
 
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * Used to get books from database
+ */
 const getAllBooks = async (req, res) => {
   try {
     const queryObject = url.parse(req.url, true).query;
@@ -95,6 +118,12 @@ const getAllBooks = async (req, res) => {
   }
 };
 
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * Used to get a book by a book id
+ */
 const getBookById = async (req, res) => {
   try {
     const response = await Book.find({ _id: req.params.id });
@@ -105,6 +134,13 @@ const getBookById = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * Used to update book details in the database
+ */
 
 const updateOneBook = async (req, res) => {
   try {
@@ -124,6 +160,12 @@ const updateOneBook = async (req, res) => {
   }
 };
 
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * Used to delete a book from the database
+ */
 const deleteOneBook = async (req, res) => {
   try {
     const book = await Book.deleteOne({ _id: req.params.id });
@@ -137,6 +179,12 @@ const deleteOneBook = async (req, res) => {
   }
 };
 
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * Used to send a pdf as a response after payment
+ */
 const downloadBookPdf = async (req, res) => {
   try {
     const response = await Book.find({ _id: req.params.id });
@@ -146,6 +194,13 @@ const downloadBookPdf = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * Used to send a thumbnail image as a response
+ */
 
 const downloadBookThumbnail = async (req, res) => {
   try {
@@ -157,6 +212,12 @@ const downloadBookThumbnail = async (req, res) => {
   }
 };
 
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} files - the files received from multer
+ * Used to generate the book object to avoid code duplication in methods requiring book
+ */
 const constructBookObject = (files,req) => {
   const book = new Book(req.body);
   if(files!=null) {

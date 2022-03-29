@@ -1,4 +1,4 @@
-// Author: Prit Thakkar (B00890731)
+/** @author Prit Thakkar (B00890731) */ 
 const cardRegex = "^(3|4|5){1}[0-9]{14,15}$";
 const isCardValid = (paymentDetails) => {
   const validCard = paymentDetails.cardNumber.match(cardRegex);

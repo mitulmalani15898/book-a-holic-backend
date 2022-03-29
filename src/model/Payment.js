@@ -1,4 +1,4 @@
-// Author: Prit Thakkar (B00890731)
+/** @author Prit Thakkar (B00890731) */
 
 /*
 The payment model is used to transfer the data received from client and the data sent back from the

@@ -1,4 +1,8 @@
-// Author: Prit Thakkar (B00890731)
+/**  @author Prit Thakkar (B00890731) */
+
+/**
+ * library used for receiving files
+ */
 const multer = require("multer");
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {

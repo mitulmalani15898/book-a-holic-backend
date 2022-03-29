@@ -1,8 +1,16 @@
-// Author: Prit Thakkar (B00890731)
+/** @author Prit THakkar (B00890731) */
 const Order = require("../model/Order");
 const Payment = require("../model/Payment");
 const uuid = require("uuid");
 
+
+/**
+ * 
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * for adding a payment method for a user
+ */
 const addPaymentMethod = async (req, res) => {
   try {
     const payment = new Payment(req.body);
@@ -29,6 +37,12 @@ const getPayments = async (req, res) => {
   }
 };
 
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * for editing a payment method for a user
+ */
 const editPaymentMethod = async (req, res) => {
   try {
     const payment = new Payment(req.body);
@@ -50,6 +64,13 @@ const editPaymentMethod = async (req, res) => {
     res.status(500).json({ success: false, data: error.message });
   }
 };
+
+/**
+ * 
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * for deleting a payment method for a user
+ */
 const deletePaymentMethod = async (req, res) => {
   try {
     const payment = await Payment.deleteOne({
@@ -68,6 +89,13 @@ const deletePaymentMethod = async (req, res) => {
   }
 };
 
+
+/**
+ * -- broken right now --
+ * @param {*} req - the http request received
+ * @param {*} res - the http response to be sent
+ * to make a purchase
+ */
 const makePayment = async (req, res) => {
   try {
     const paymentDetails = req.body.payment;

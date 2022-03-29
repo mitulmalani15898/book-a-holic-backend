@@ -1,4 +1,5 @@
-// Author: Prit Thakkar (B00890731)
+/** @author Prit Thakkar (B00890731) */
+
 const mongoose = require("mongoose");
 const connect = mongoose.connect;
 const MONGODB_URL = process.env.MONGODB_URL;

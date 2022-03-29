@@ -1,11 +1,7 @@
-//import express from "express";
-// import {
-//   getUsers,
-//   addUser,
-//   getUserById,
-//   editUser,
-//   deleteUser,
-// } from "../controller/user-controller.js";
+/** Author : JAINAM SHAH
+ */
+
+
 
 const express = require("express");
 const route = express.Router();

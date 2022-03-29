@@ -14,35 +14,62 @@ const addborrowedtMethod = async (req, res) => {
       res.status(500).send({ success: false, message: error.message });
     }
   };
-  const getborrowed = async (req, res) => {
+  const getborrowed = async (request, response) => {
+    const id = request.params.id;
     try {
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Data Retreived",
-          data: await userdash.find(),
-        });
+      const user = await userdash.findById(id);
+      response.json(user.borrowedbooks);
     } catch (error) {
-      console.log(error);
+      response.json({ message: error.message });
     }
+    // try {
+    //   res
+    //     .status(200)
+    //     .json({
+    //       success: true,
+    //       message: "Data Retreived",
+    //       data: await userdash.find(),
+    //     });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  const getfavorites = async (request, response) => {
+    const id = request.params.id;
+    try {
+      const user = await userdash.findById(id);
+      response.json(user.favoritebooks);
+    } catch (error) {
+      response.json({ message: error.message });
+    }
+    // try {
+    //   res
+    //     .status(200)
+    //     .json({
+    //       success: true,
+    //       message: "Data Retreived",
+    //       data: await userdash.find(),
+    //     });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
 
-  const editfavorites = async (req, res) => {
-    try {
-      const favorites = req.body.favorites;
+  const editfavorites = async (request, response) => {
+    const user = request.body;
 
-      
-        let newFavorite = new Order(req.body);
-        const responseForOrder = await newOrder.save();
-        favorites.push(newFavorite);
-      
-      res.status(200).json({ success: true, data: orders });
-    } catch (error) {
-      console.log(error);
-    }
+  const editUser = new userdash(user);
+
+  try {
+    await userdash.update({ _id: request.params.id }, editUser);
+    response.json(editUser);
+  } catch (error) {
+    response.json({ message: error.message });
+  }
   };
   exports.addborrowedtMethod=addborrowedtMethod;
   exports.getborrowed=getborrowed;
+  exports.favoritebooks=getfavorites;
   exports.editfavorites=editfavorites;

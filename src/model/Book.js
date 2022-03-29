@@ -1,8 +1,10 @@
-// Author: Prit Thakkar (B00890731)
+/** @author Prit Thakkar (B00890731) */
 const mongoose = require("mongoose");
 const model = mongoose.model;
 const Schema = mongoose.Schema;
-
+/**
+ * The book schema built using mongoose
+ */
 const book = new Schema({
   _id:String,
   title: String,

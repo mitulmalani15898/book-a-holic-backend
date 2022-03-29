@@ -126,7 +126,7 @@ async function main(auth) {
     to: auth.email, // list of receivers
     subject: "Password change Request", // Subject line
     text: "Follow the link to change your password", // plain text body
-    html: ` http://localhost:3000/recovery/${auth.token}/${auth.email}`, // html body
+    html: ` http://bookaholic-app.herokuapp.com/recovery/${auth.token}/${auth.email}`, // html body
   });
 
   console.log("Message sent: %s", info.messageId);

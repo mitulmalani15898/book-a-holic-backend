@@ -116,8 +116,11 @@ async function main(auth) {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.SENDER_EMAIL,
-      pass: process.env.SENDER_PASSWORD,
+      // user: process.env.SENDER_EMAIL,
+      // pass: process.env.SENDER_PASSWORD,
+      user: "web.5709.group5@gmail.com",
+      pass: "group5@web",
+
     },
   });
 
@@ -126,7 +129,7 @@ async function main(auth) {
     to: auth.email, // list of receivers
     subject: "Password change Request", // Subject line
     text: "Follow the link to change your password", // plain text body
-    html: ` http://bookaholic-app.herokuapp.com/recovery/${auth.token}/${auth.email}`, // html body
+    html: `https://bookaholic-app.herokuapp.com/recovery/${auth.token}/${auth.email}`, // html body
   });
 
   console.log("Message sent: %s", info.messageId);

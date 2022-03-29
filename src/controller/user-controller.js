@@ -1,7 +1,9 @@
-// import { request } from "express";
-// import { response } from "express";
-//import User from "../model/user-schema.js";
-//const Order = require("../model/Order");
+
+/** Author : JAINAM SHAH
+ */
+
+
+
 const User = require("../model/user-schema");
 
 const getUsers = async (request, response) => {
@@ -14,8 +16,7 @@ const getUsers = async (request, response) => {
 };
 
 const addUser = async (request, response) => {
-  // console.log("hello");
-  // response.send("jainam");
+ 
 
   const user = request.body;
   console.log(user);
@@ -61,8 +62,7 @@ const deleteUser = async (request, response) => {
   }
 };
 
-//export default getUsers;
-//exports.getUserOrders = getUserOrders;
+
 module.exports = {
   getUsers,
   getUserById,

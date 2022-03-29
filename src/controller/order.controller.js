@@ -1,5 +1,12 @@
+/**
+ * File: order.controller.js
+ * Author: Yashvi Gulati (B00900339)
+ * File Purpose: Contains controller logic for all order APIs.
+ */
+
 const Order = require("../model/Order");
 
+// GET - To get all the order details for the specific user
 const getUserOrderHistory = async (req, res) => {
   const userEmail = req.params.email;
   try {

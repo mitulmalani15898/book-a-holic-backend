@@ -1,3 +1,9 @@
+/**
+ * File: user.controller.js
+ * Author: Abhinav Rawat (B00895691)
+ * File Purpose: Contains controller logic for all user APIs.
+ */
+
 const jwt = require("jsonwebtoken");
 const user = require("../model/User");
 const nodemailer = require("nodemailer");
@@ -36,7 +42,6 @@ const loginUser = async (req, res) => {
     const userData = new user(req.body);
     const userEmail = userData.email;
     const userPassword = userData.password;
-    //console.log(req.body);
     const response = await user.findOne({ email: userEmail });
     const fetchedPassword = response.password;
     if (userPassword === fetchedPassword) {
@@ -44,7 +49,6 @@ const loginUser = async (req, res) => {
         expiresIn: "1h",
       });
       var auth = { token: token, email: userEmail };
-      //console.log(auth);
       return res.status(200).send({
         success: true,
         data: auth,
@@ -66,8 +70,6 @@ const forgotUser = async (req, res) => {
         expiresIn: "15m",
       });
       var auth = { token: token, email: userEmail };
-      //console.log(auth);
-
       main(auth).catch(console.error);
 
       return res
@@ -114,8 +116,11 @@ async function main(auth) {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.SENDER_EMAIL,
-      pass: process.env.SENDER_PASSWORD,
+      // user: process.env.SENDER_EMAIL,
+      // pass: process.env.SENDER_PASSWORD,
+      user: "web.5709.group5@gmail.com",
+      pass: "group5@web",
+
     },
   });
 
@@ -124,7 +129,7 @@ async function main(auth) {
     to: auth.email, // list of receivers
     subject: "Password change Request", // Subject line
     text: "Follow the link to change your password", // plain text body
-    html: ` http://localhost:3000/recovery/${auth.token}/${auth.email}`, // html body
+    html: `https://bookaholic-app.herokuapp.com/recovery/${auth.token}/${auth.email}`, // html body
   });
 
   console.log("Message sent: %s", info.messageId);
@@ -139,4 +144,3 @@ exports.loginUser = loginUser;
 exports.addUser = addUser;
 exports.forgotUser = forgotUser;
 exports.recoveryUser = recoveryUser;
-//exports.changePassword = changePassword;

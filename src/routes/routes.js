@@ -1,11 +1,7 @@
-//import express from "express";
-// import {
-//   getUsers,
-//   addUser,
-//   getUserById,
-//   editUser,
-//   deleteUser,
-// } from "../controller/user-controller.js";
+/** Author : JAINAM SHAH
+ */
+
+
 
 const express = require("express");
 const route = express.Router();
@@ -25,10 +21,4 @@ route.delete("/api/users/delete/:id", deleteUser);
 
 module.exports = route;
 
-//route.get("/api/user", getUsers);
-//export default route;
-// route.get("/api/user/users", getUsers);
-// route.post("/api/user/add", addUser);
-// route.get("/api/user/:id", getUserById);
-// route.put("/api/user/:id", editUser);
-// route.delete("/api/user/:id", deleteUser);
+

@@ -1,7 +1,13 @@
+/**
+ * File: Reviews.js
+ * Author: Abhinav Rawat (B00895691)
+ * File Purpose: Review Model
+ */
+
 const mongoose = require("mongoose");
 
 const reviewModel = new mongoose.Schema({
-  bookId:{
+  bookId: {
     type: String,
   },
   email: {
@@ -10,13 +16,12 @@ const reviewModel = new mongoose.Schema({
   },
   review: {
     type: String,
-    required: false
+    required: false,
   },
   date: {
     type: Date,
     default: Date.now,
   },
 });
-
 
 module.exports = mongoose.model("reviews", reviewModel);

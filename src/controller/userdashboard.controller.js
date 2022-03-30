@@ -57,6 +57,30 @@ const addborrowedtMethod = async (req, res) => {
   };
 
 
+  
+  const getnames = async (request, response) => {
+    const id = request.params.id;
+    try {
+      const user = await userdash.findById(id);
+      response.json(user.name);
+    } catch (error) {
+      response.json({ message: error.message });
+    }
+    // try {
+    //   res
+    //     .status(200)
+    //     .json({
+    //       success: true,
+    //       message: "Data Retreived",
+    //       data: await userdash.find(),
+    //     });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+
+
   const editfavorites = async (request, response) => {
     const user = request.body;
 
@@ -72,4 +96,5 @@ const addborrowedtMethod = async (req, res) => {
   exports.addborrowedtMethod=addborrowedtMethod;
   exports.getborrowed=getborrowed;
   exports.favoritebooks=getfavorites;
+  exports.getnames=getnames;
   exports.editfavorites=editfavorites;

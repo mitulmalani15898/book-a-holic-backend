@@ -6,6 +6,7 @@ const path = require("path");
 
 require("./src/utils/mongo.connection");
 const paymentRoutes = require("./src/routes/payment.routes");
+const cartRoutes = require("./src/routes/cart.routes");
 const orderRoutes = require("./src/routes/order.routes");
 const bookRoutes = require("./src/routes/book.routes");
 const userRoutess = require("./src/routes/routes");
@@ -13,7 +14,7 @@ const profileRoutes = require("./src/routes/user.profile.routes");
 const reviewRoutes = require("./src/routes/review.routes");
 const userRoutes = require("./src/routes/user.routes");
 //ns
-const userDashBoardRoute=require("./src/routes/userdashboard.routes");
+const userDashBoardRoute = require("./src/routes/userdashboard.routes");
 const app = express();
 
 // accepting incoming json requests
@@ -41,6 +42,7 @@ app.get("/", (req, res) => {
 
 app.use("/static", express.static("static"));
 app.use(paymentRoutes);
+app.use(cartRoutes);
 app.use(orderRoutes);
 app.use(bookRoutes);
 app.use(profileRoutes);

@@ -109,7 +109,8 @@ const makePayment = async (req, res) => {
         bookName: allOrders[order].bookName,
         bookId: allOrders[order].bookId,
         price: allOrders[order].price,
-        userId: allOrders[order].userId,
+        email: allOrders[order].userId,
+        amount: allOrders[order].amount,
         purchaseDate: String(new Date()),
       });
       const responseForOrder = await newOrder.save();
@@ -120,6 +121,7 @@ const makePayment = async (req, res) => {
     console.log(error);
   }
 };
+
 
 exports.addPaymentMethod = addPaymentMethod;
 exports.getPayments = getPayments;

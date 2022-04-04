@@ -100,17 +100,15 @@ const makePayment = async (req, res) => {
   try {
     const paymentDetails = req.body.payment;
 
-    const allOrders = req.body.orders;
+    const email = req.body.email;
+    const allOrders = req.body.books;
     let orders = [];
     for (const order in allOrders) {
-      console.log(allOrders[order].bookName);
       let newOrder = new Order({
-        _id: uuid.v4(),
-        bookName: allOrders[order].bookName,
-        bookId: allOrders[order].bookId,
-        price: allOrders[order].price,
-        email: allOrders[order].userId,
-        amount: allOrders[order].amount,
+        bookName: allOrders[order].title,
+        bookId: allOrders[order]._id,
+        amount: allOrders[order].price,
+        email: email,
         purchaseDate: String(new Date()),
       });
       const responseForOrder = await newOrder.save();

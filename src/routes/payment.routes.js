@@ -37,6 +37,6 @@ router.post("/api/payments", paymentServices.makePayment);
 /*
 
 
-router.post("/",);*/
+router.post("/",);*/ 
 
 module.exports = router;

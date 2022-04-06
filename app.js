@@ -13,8 +13,9 @@ const userRoutess = require("./src/routes/routes");
 const profileRoutes = require("./src/routes/user.profile.routes");
 const reviewRoutes = require("./src/routes/review.routes");
 const userRoutes = require("./src/routes/user.routes");
-//ns
-const userDashBoardRoute = require("./src/routes/userdashboard.routes");
+const recentPur= require("./src/routes/recentPurchases.routes");
+const trending=require("./src/routes/trendingPurchases.routes");
+
 const app = express();
 
 // accepting incoming json requests
@@ -49,7 +50,8 @@ app.use(profileRoutes);
 app.use(reviewRoutes);
 app.use(userRoutes);
 app.use(userRoutess);
-app.use(userDashBoardRoute);
+app.use(recentPur);
+app.use(trending);
 app.use("*", (req, res) => {
   res.status("404").send("Route not found.");
 });
